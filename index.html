@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>CraftX 3D Game</title>
-  <link rel="manifest" href="manifest.json">
+  <title>CraftX 3D Game - Extended Edition</title>
   <style>
     body {
       margin: 0;
@@ -18,69 +17,73 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 10px;
-      height: 10px;
-      background: white;
-      border: 2px solid black;
-      border-radius: 50%;
+      width: 12px;
+      height: 12px;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 10;
     }
-    #ui {
+    #crosshair::before, #crosshair::after {
+      content: '';
       position: absolute;
-      bottom: 100px;
+      background: white;
+    }
+    #crosshair::before { top: 5px; left: 0; width: 12px; height: 2px; }
+    #crosshair::after { top: 0; left: 5px; width: 2px; height: 12px; }
+
+    #hotbar {
+      position: absolute;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 6px;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px;
+      border-radius: 8px;
+      border: 2px solid #555;
       z-index: 10;
     }
-    .btn {
-      background: rgba(0, 0, 0, 0.6);
+    .slot {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #888;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       color: white;
-      border: 2px solid white;
-      padding: 8px 12px;
-      border-radius: 8px;
+      font-size: 10px;
       font-weight: bold;
-      font-size: 12px;
       cursor: pointer;
     }
-    .btn.active {
+    .slot.active {
       border-color: #ff0;
-      background: rgba(255, 255, 0, 0.3);
+      background: rgba(255, 255, 0, 0.2);
     }
-    #instructions {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.5);
-      color: white;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      z-index: 10;
-      pointer-events: none;
-      text-align: center;
+    .slot-count {
+      font-size: 9px;
+      color: #0f0;
     }
-    /* Touch D-Pad Controls */
+
     #dpad {
       position: absolute;
       bottom: 15px;
       left: 15px;
       display: grid;
-      grid-template-columns: repeat(3, 45px);
-      grid-template-rows: repeat(3, 45px);
-      gap: 4px;
+      grid-template-columns: repeat(3, 40px);
+      grid-template-rows: repeat(3, 40px);
+      gap: 3px;
       z-index: 20;
     }
     .dbtn {
       background: rgba(0, 0, 0, 0.5);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
-      font-size: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 6px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -89,13 +92,25 @@
       position: absolute;
       bottom: 25px;
       right: 20px;
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.6);
       color: white;
       border: 2px solid white;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 20;
+    }
+    #modeToggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: 1px solid white;
+      padding: 8px 12px;
+      border-radius: 6px;
       font-weight: bold;
       z-index: 20;
     }
@@ -105,64 +120,90 @@
 <body>
 
   <div id="crosshair"></div>
-  <div id="instructions">Left: Move | Right Screen: Drag Look / Tap Block | Jump</div>
+  <button id="modeToggle" onclick="toggleMode()">Mode: Dig (Hand)</button>
   
-  <!-- D-Pad Movement -->
   <div id="dpad">
-    <div></div>
-    <div class="dbtn" id="btnFwd">▲</div>
-    <div></div>
-    <div class="dbtn" id="btnLeft">◄</div>
-    <div></div>
-    <div class="dbtn" id="btnRight">►</div>
-    <div></div>
-    <div class="dbtn" id="btnBwd">▼</div>
-    <div></div>
+    <div></div><div class="dbtn" id="btnFwd">▲</div><div></div>
+    <div class="dbtn" id="btnLeft">◄</div><div></div><div class="dbtn" id="btnRight">►</div>
+    <div></div><div class="dbtn" id="btnBwd">▼</div><div></div>
   </div>
 
   <button id="jumpBtn">JUMP</button>
 
-  <div id="ui">
-    <button class="btn active" onclick="selectBlock(0x8B4513, this)">Dirt</button>
-    <button class="btn" onclick="selectBlock(0x556B2F, this)">Grass</button>
-    <button class="btn" onclick="selectBlock(0x808080, this)">Stone</button>
-    <button class="btn" onclick="selectBlock(0x5c4033, this)">Wood</button>
-    <button class="btn" onclick="selectBlock(0x2e8b57, this)">Leaves</button>
-    <button class="btn" onclick="toggleMode(this)" id="modeBtn">Build</button>
+  <div id="hotbar">
+    <div class="slot active" onclick="selectSlot(0)">Dirt<span class="slot-count" id="cnt-dirt">0</span></div>
+    <div class="slot" onclick="selectSlot(1)">Grass<span class="slot-count" id="cnt-grass">0</span></div>
+    <div class="slot" onclick="selectSlot(2)">Stone<span class="slot-count" id="cnt-stone">0</span></div>
+    <div class="slot" onclick="selectSlot(3)">Wood<span class="slot-count" id="cnt-wood">0</span></div>
+    <div class="slot" onclick="selectSlot(4)">Food<span class="slot-count" id="cnt-food">0</span></div>
   </div>
 
   <script>
-    // 1. Scene, Camera, Lighting
+    // 1. Scene & Environment Lighting
     const scene = new THREE.Scene();
-    const skyColor = new THREE.Color(0x87ceeb);
-    scene.background = skyColor;
-    scene.fog = new THREE.FogExp2(0x87ceeb, 0.025);
+    scene.background = new THREE.Color(0x7ec0ee);
+    scene.fog = new THREE.FogExp2(0x7ec0ee, 0.02);
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0xffffed, 0.6);
-    dirLight.position.set(50, 100, 50);
-    scene.add(dirLight);
 
-    // 2. World & Voxels
+    const sun = new THREE.DirectionalLight(0xffffff, 0.7);
+    sun.position.set(40, 80, 40);
+    sun.castShadow = true;
+    scene.add(sun);
+
+    // 2. Textures & Materials
+    function createBlockTexture(color, noiseScale = 0.1) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64; canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, 64, 64);
+      
+      for(let i=0; i<300; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
+        ctx.fillRect(Math.random()*64, Math.random()*64, 4, 4);
+      }
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    const materials = {
+      dirt: new THREE.MeshStandardMaterial({ map: createBlockTexture('#795548'), roughness: 0.9 }),
+      grass: new THREE.MeshStandardMaterial({ map: createBlockTexture('#4caf50'), roughness: 0.8 }),
+      stone: new THREE.MeshStandardMaterial({ map: createBlockTexture('#757575'), roughness: 0.6 }),
+      wood: new THREE.MeshStandardMaterial({ map: createBlockTexture('#3e2723'), roughness: 0.7 }),
+      water: new THREE.MeshStandardMaterial({ color: 0x006994, transparent: true, opacity: 0.7, roughness: 0.1 })
+    };
+
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const blocks = [];
     const blockGroup = new THREE.Group();
     scene.add(blockGroup);
 
-    function createBlock(x, y, z, color) {
-      const material = new THREE.MeshLambertMaterial({ color: color });
-      const cube = new THREE.Mesh(geometry, material);
+    // 3. Terrain with Mountains, Caves & Water
+    const worldSize = 16;
+    const waterLevel = 0;
+
+    function getTerrainHeight(x, z) {
+      return Math.floor(Math.sin(x * 0.3) * Math.cos(z * 0.3) * 3);
+    }
+
+    function createBlock(x, y, z, matType, typeName) {
+      const cube = new THREE.Mesh(geometry, materials[matType]);
       cube.position.set(x, y, z);
-      
+      cube.castShadow = true;
+      cube.receiveShadow = true;
+      cube.userData = { type: typeName };
+
       const edges = new THREE.EdgesGeometry(geometry);
-      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, opacity: 0.25, transparent: true }));
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, opacity: 0.15, transparent: true }));
       cube.add(line);
 
       blockGroup.add(cube);
@@ -170,200 +211,204 @@
       return cube;
     }
 
-    // Larger Terrain Generation
-    const worldSize = 20;
     for (let x = -worldSize; x <= worldSize; x++) {
       for (let z = -worldSize; z <= worldSize; z++) {
-        createBlock(x, 0, z, 0x556B2F); // Grass
-        createBlock(x, -1, z, 0x8B4513); // Dirt
-      }
-    }
-
-    // Tree Generator
-    function generateTree(x, z) {
-      const height = 3 + Math.floor(Math.random() * 2);
-      for (let i = 1; i <= height; i++) {
-        createBlock(x, i, z, 0x5c4033); // Wood Trunk
-      }
-      for (let lx = -1; lx <= 1; lx++) {
-        for (let lz = -1; lz <= 1; lz++) {
-          for (let ly = height; ly <= height + 2; ly++) {
-            if (!(lx === 0 && lz === 0 && ly === height)) {
-              createBlock(x + lx, ly, z + lz, 0x2e8b57); // Leaves
+        const h = getTerrainHeight(x, z);
+        
+        // Surface & Layers
+        if (h >= waterLevel) {
+          createBlock(x, h, z, 'grass', 'grass');
+          createBlock(x, h - 1, z, 'dirt', 'dirt');
+          for (let y = h - 2; y >= h - 4; y--) {
+            createBlock(x, y, z, 'stone', 'stone');
+          }
+        } else {
+          // Valleys & Water
+          for (let y = h; y <= waterLevel; y++) {
+            if (y === waterLevel) {
+              const w = new THREE.Mesh(geometry, materials.water);
+              w.position.set(x, y, z);
+              scene.add(w);
+            } else {
+              createBlock(x, y, z, 'dirt', 'dirt');
             }
           }
         }
       }
     }
 
-    // Spawn Random Trees
-    for (let i = 0; i < 12; i++) {
-      const tx = Math.floor(Math.random() * (worldSize * 2 - 4)) - worldSize + 2;
-      const tz = Math.floor(Math.random() * (worldSize * 2 - 4)) - worldSize + 2;
-      generateTree(tx, tz);
+    // 4. Inventory System
+    const inventory = { dirt: 0, grass: 0, stone: 0, wood: 0, food: 0 };
+    let activeSlotIndex = 0;
+    const slotTypes = ['dirt', 'grass', 'stone', 'wood', 'food'];
+
+    function updateInventoryUI() {
+      slotTypes.forEach(t => {
+        const el = document.getElementById(`cnt-${t}`);
+        if(el) el.innerText = inventory[t];
+      });
     }
 
-    // 3. Simple Voxel Animals
-    const animals = [];
-    function spawnAnimal(x, z, color) {
-      const animalGroup = new THREE.Group();
-      // Body
-      const bodyGeom = new THREE.BoxGeometry(0.8, 0.6, 1.2);
-      const mat = new THREE.MeshLambertMaterial({ color: color });
-      const body = new THREE.Mesh(bodyGeom, mat);
+    function selectSlot(idx) {
+      activeSlotIndex = idx;
+      document.querySelectorAll('.slot').forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+      });
+    }
+
+    let isDigMode = true;
+    function toggleMode() {
+      isDigMode = !isDigMode;
+      document.getElementById('modeToggle').innerText = isDigMode ? "Mode: Dig (Hand)" : "Mode: Place";
+    }
+
+    // 5. Interactive Mobs with Health & Drop Items
+    const mobs = [];
+    function spawnAnimal(x, z) {
+      const mobGroup = new THREE.Group();
+      const bodyMat = new THREE.MeshStandardMaterial({ map: createBlockTexture('#ffffff') });
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.6, 1.2), bodyMat);
       body.position.y = 0.5;
-      animalGroup.add(body);
+      mobGroup.add(body);
 
-      // Head
-      const headGeom = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-      const head = new THREE.Mesh(headGeom, mat);
-      head.position.set(0, 0.8, 0.7);
-      animalGroup.add(head);
+      const head = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), bodyMat);
+      head.position.set(0, 0.8, 0.6);
+      mobGroup.add(head);
 
-      animalGroup.position.set(x, 0.5, z);
-      scene.add(animalGroup);
-      animals.push(animalGroup);
+      mobGroup.position.set(x, getTerrainHeight(x, z) + 1, z);
+      mobGroup.userData = { health: 3, isMob: true };
+      scene.add(mobGroup);
+      mobs.push(mobGroup);
     }
 
-    spawnAnimal(3, 3, 0xffc0cb); // Pig
-    spawnAnimal(-4, -5, 0xf0f0f0); // Sheep
+    spawnAnimal(2, 2);
+    spawnAnimal(-4, -3);
 
-    // 4. Player Movement & Physics
-    const player = {
-      pos: new THREE.Vector3(0, 3, 0),
-      velocity: new THREE.Vector3(),
-      isGrounded: false,
-      height: 1.6
-    };
+    // 6. Player Control, Gravity & Physics
+    const player = { pos: new THREE.Vector3(0, 6, 0), vel: new THREE.Vector3(), grounded: false };
     camera.position.copy(player.pos);
 
     const moveInput = { fwd: 0, bwd: 0, left: 0, right: 0 };
-
-    // D-Pad Touch Listeners
-    function setupDPad(id, key) {
+    function bindDPad(id, key) {
       const el = document.getElementById(id);
       el.addEventListener('touchstart', (e) => { e.preventDefault(); moveInput[key] = 1; });
       el.addEventListener('touchend', (e) => { e.preventDefault(); moveInput[key] = 0; });
     }
-    setupDPad('btnFwd', 'fwd');
-    setupDPad('btnBwd', 'bwd');
-    setupDPad('btnLeft', 'left');
-    setupDPad('btnRight', 'right');
+    bindDPad('btnFwd', 'fwd'); bindDPad('btnBwd', 'bwd');
+    bindDPad('btnLeft', 'left'); bindDPad('btnRight', 'right');
 
     document.getElementById('jumpBtn').addEventListener('touchstart', (e) => {
       e.preventDefault();
-      if (player.isGrounded) {
-        player.velocity.y = 0.18;
-        player.isGrounded = false;
-      }
+      if (player.grounded) { player.vel.y = 0.16; player.grounded = false; }
     });
 
-    // Camera Look Controls
-    let lon = 0, lat = 0;
-    let previousTouch = { x: 0, y: 0 };
-    let isDragging = false;
-    let touchStartTime = 0;
-
+    // Camera Pan Controls
+    let lon = 0, lat = 0, prevTouch = { x: 0, y: 0 }, isDragging = false, touchStartTime = 0;
     window.addEventListener('touchstart', (e) => {
-      if (e.target.closest('#dpad') || e.target.closest('#ui') || e.target.id === 'jumpBtn') return;
+      if (e.target.closest('#dpad') || e.target.closest('#hotbar') || e.target.id === 'jumpBtn' || e.target.id === 'modeToggle') return;
       isDragging = false;
       touchStartTime = Date.now();
-      previousTouch.x = e.touches[0].clientX;
-      previousTouch.y = e.touches[0].clientY;
+      prevTouch.x = e.touches[0].clientX;
+      prevTouch.y = e.touches[0].clientY;
     });
 
     window.addEventListener('touchmove', (e) => {
-      if (e.target.closest('#dpad') || e.target.closest('#ui') || e.target.id === 'jumpBtn') return;
-      const deltaX = e.touches[0].clientX - previousTouch.x;
-      const deltaY = e.touches[0].clientY - previousTouch.y;
+      if (e.target.closest('#dpad') || e.target.closest('#hotbar') || e.target.id === 'jumpBtn' || e.target.id === 'modeToggle') return;
+      const dx = e.touches[0].clientX - prevTouch.x;
+      const dy = e.touches[0].clientY - prevTouch.y;
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) isDragging = true;
 
-      if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) isDragging = true;
-
-      lon -= deltaX * 0.3;
-      lat += deltaY * 0.3;
+      lon -= dx * 0.25;
+      lat += dy * 0.25;
       lat = Math.max(-85, Math.min(85, lat));
-
-      previousTouch.x = e.touches[0].clientX;
-      previousTouch.y = e.touches[0].clientY;
+      prevTouch.x = e.touches[0].clientX;
+      prevTouch.y = e.touches[0].clientY;
     });
 
     window.addEventListener('touchend', (e) => {
-      if (!isDragging && (Date.now() - touchStartTime < 300)) {
-        if (!e.target.closest('#dpad') && !e.target.closest('#ui') && e.target.id !== 'jumpBtn') {
-          handleRaycast();
+      if (!isDragging && (Date.now() - touchStartTime < 250)) {
+        if (!e.target.closest('#dpad') && !e.target.closest('#hotbar') && e.target.id !== 'jumpBtn' && e.target.id !== 'modeToggle') {
+          handleInteraction();
         }
       }
     });
 
-    // Block Interaction
-    let selectedColor = 0x8B4513;
-    let isDestroyMode = false;
+    // Digging, Building & Mob Attack Logic
     const raycaster = new THREE.Raycaster();
-    const centerVector = new THREE.Vector2(0, 0);
+    const center = new THREE.Vector2(0, 0);
 
-    function handleRaycast() {
-      raycaster.setFromCamera(centerVector, camera);
-      const intersects = raycaster.intersectObjects(blocks);
+    function handleInteraction() {
+      raycaster.setFromCamera(center, camera);
+      
+      // Mob Attack Check
+      const mobHits = raycaster.intersectObjects(mobs.map(m => m.children[0]));
+      if (mobHits.length > 0) {
+        const hitMobGroup = mobHits[0].object.parent;
+        hitMobGroup.userData.health -= 1;
+        hitMobGroup.position.y += 0.2; // Knockback response
+        
+        if (hitMobGroup.userData.health <= 0) {
+          scene.remove(hitMobGroup);
+          mobs.splice(mobs.indexOf(hitMobGroup), 1);
+          inventory.food += 1; // Raw Mutton Drop
+          updateInventoryUI();
+        }
+        return;
+      }
 
-      if (intersects.length > 0) {
-        const intersect = intersects[0];
-        if (isDestroyMode) {
-          blockGroup.remove(intersect.object);
-          const index = blocks.indexOf(intersect.object);
-          if (index > -1) blocks.splice(index, 1);
+      // Block Digging / Placement
+      const hits = raycaster.intersectObjects(blocks);
+      if (hits.length > 0) {
+        const hit = hits[0];
+        if (isDigMode) {
+          const type = hit.object.userData.type || 'dirt';
+          inventory[type] = (inventory[type] || 0) + 1;
+          updateInventoryUI();
+
+          blockGroup.remove(hit.object);
+          blocks.splice(blocks.indexOf(hit.object), 1);
         } else {
-          const normal = intersect.face.normal;
-          const newPos = intersect.object.position.clone().add(normal);
-          createBlock(newPos.x, newPos.y, newPos.z, selectedColor);
+          const activeType = slotTypes[activeSlotIndex];
+          if (inventory[activeType] > 0 && activeType !== 'food') {
+            inventory[activeType] -= 1;
+            updateInventoryUI();
+            
+            const normal = hit.face.normal;
+            const pos = hit.object.position.clone().add(normal);
+            createBlock(pos.x, pos.y, pos.z, activeType, activeType);
+          }
         }
       }
     }
 
-    function selectBlock(color, btn) {
-      selectedColor = color;
-      document.querySelectorAll('#ui .btn').forEach(b => { if(b.id !== 'modeBtn') b.classList.remove('active'); });
-      btn.classList.add('active');
-    }
-
-    function toggleMode(btn) {
-      isDestroyMode = !isDestroyMode;
-      btn.innerText = isDestroyMode ? "Break" : "Build";
-      btn.style.borderColor = isDestroyMode ? "#ff4444" : "white";
-    }
-
-    // 5. Game Loop & Physics Update
-    const gravity = 0.008;
-
+    // Physics Engine Loop
     function updatePhysics() {
-      // Rotation vectors
       const phi = THREE.MathUtils.degToRad(90 - lat);
       const theta = THREE.MathUtils.degToRad(lon);
 
-      const forward = new THREE.Vector3(Math.cos(theta), 0, Math.sin(theta)).normalize();
+      const fwd = new THREE.Vector3(Math.cos(theta), 0, Math.sin(theta)).normalize();
       const side = new THREE.Vector3(-Math.sin(theta), 0, Math.cos(theta)).normalize();
 
-      // Movement Vector
-      const moveDir = new THREE.Vector3();
-      if (moveInput.fwd) moveDir.add(forward);
-      if (moveInput.bwd) moveDir.sub(forward);
-      if (moveInput.right) moveDir.add(side);
-      if (moveInput.left) moveDir.sub(side);
-      moveDir.normalize().multiplyScalar(0.08);
+      const move = new THREE.Vector3();
+      if (moveInput.fwd) move.add(fwd);
+      if (moveInput.bwd) move.sub(fwd);
+      if (moveInput.right) move.add(side);
+      if (moveInput.left) move.sub(side);
+      move.normalize().multiplyScalar(0.08);
 
-      player.pos.add(moveDir);
+      player.pos.add(move);
 
-      // Apply Gravity
-      player.velocity.y -= gravity;
-      player.pos.y += player.velocity.y;
+      // Simple Gravity & Floor Height
+      player.vel.y -= 0.007;
+      player.pos.y += player.vel.y;
 
-      // Ground Collision (Simplistic floor check at y = 1.6 above blocks)
-      if (player.pos.y < 1.6) {
-        player.pos.y = 1.6;
-        player.velocity.y = 0;
-        player.isGrounded = true;
+      const groundY = getTerrainHeight(Math.round(player.pos.x), Math.round(player.pos.z)) + 1.6;
+      if (player.pos.y < groundY) {
+        player.pos.y = groundY;
+        player.vel.y = 0;
+        player.grounded = true;
       }
 
-      // Update Camera Position & Direction
       camera.position.copy(player.pos);
       const target = new THREE.Vector3(
         player.pos.x + Math.sin(phi) * Math.cos(theta),
@@ -372,10 +417,10 @@
       );
       camera.lookAt(target);
 
-      // Simple Animal Movement
-      animals.forEach(a => {
-        a.position.x += (Math.random() - 0.5) * 0.01;
-        a.position.z += (Math.random() - 0.5) * 0.01;
+      // Mob Artificial Intelligence (Wandering)
+      mobs.forEach(m => {
+        m.position.x += (Math.random() - 0.5) * 0.02;
+        m.position.z += (Math.random() - 0.5) * 0.02;
       });
     }
 
