@@ -29,21 +29,21 @@
     }
     #ui {
       position: absolute;
-      bottom: 20px;
+      bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 6px;
       z-index: 10;
     }
     .btn {
       background: rgba(0, 0, 0, 0.6);
       color: white;
       border: 2px solid white;
-      padding: 10px 16px;
+      padding: 8px 12px;
       border-radius: 8px;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
     }
     .btn.active {
@@ -59,31 +59,84 @@
       color: white;
       padding: 5px 12px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       z-index: 10;
       pointer-events: none;
+      text-align: center;
+    }
+    /* Touch D-Pad Controls */
+    #dpad {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      display: grid;
+      grid-template-columns: repeat(3, 45px);
+      grid-template-rows: repeat(3, 45px);
+      gap: 4px;
+      z-index: 20;
+    }
+    .dbtn {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #jumpBtn {
+      position: absolute;
+      bottom: 25px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: 2px solid white;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 20;
     }
   </style>
-  <!-- Three.js engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
   <div id="crosshair"></div>
-  <div id="instructions">Drag screen to look around | Tap to place/remove</div>
+  <div id="instructions">Left: Move | Right Screen: Drag Look / Tap Block | Jump</div>
   
+  <!-- D-Pad Movement -->
+  <div id="dpad">
+    <div></div>
+    <div class="dbtn" id="btnFwd">▲</div>
+    <div></div>
+    <div class="dbtn" id="btnLeft">◄</div>
+    <div></div>
+    <div class="dbtn" id="btnRight">►</div>
+    <div></div>
+    <div class="dbtn" id="btnBwd">▼</div>
+    <div></div>
+  </div>
+
+  <button id="jumpBtn">JUMP</button>
+
   <div id="ui">
     <button class="btn active" onclick="selectBlock(0x8B4513, this)">Dirt</button>
     <button class="btn" onclick="selectBlock(0x556B2F, this)">Grass</button>
     <button class="btn" onclick="selectBlock(0x808080, this)">Stone</button>
-    <button class="btn" onclick="toggleMode(this)" id="modeBtn">Mode: Build</button>
+    <button class="btn" onclick="selectBlock(0x5c4033, this)">Wood</button>
+    <button class="btn" onclick="selectBlock(0x2e8b57, this)">Leaves</button>
+    <button class="btn" onclick="toggleMode(this)" id="modeBtn">Build</button>
   </div>
 
   <script>
-    // 1. Scene, Camera, Renderer Setup
+    // 1. Scene, Camera, Lighting
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87ceeb);
-    scene.fog = new THREE.FogExp2(0x87ceeb, 0.03);
+    const skyColor = new THREE.Color(0x87ceeb);
+    scene.background = skyColor;
+    scene.fog = new THREE.FogExp2(0x87ceeb, 0.025);
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -91,14 +144,13 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     document.body.appendChild(renderer.domElement);
 
-    // Lightings
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    dirLight.position.set(20, 40, 20);
+    const dirLight = new THREE.DirectionalLight(0xffffed, 0.6);
+    dirLight.position.set(50, 100, 50);
     scene.add(dirLight);
 
-    // 2. World Generation
+    // 2. World & Voxels
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const blocks = [];
     const blockGroup = new THREE.Group();
@@ -109,39 +161,111 @@
       const cube = new THREE.Mesh(geometry, material);
       cube.position.set(x, y, z);
       
-      // Wireframe border for voxel look
       const edges = new THREE.EdgesGeometry(geometry);
-      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, opacity: 0.25, transparent: true }));
       cube.add(line);
 
       blockGroup.add(cube);
       blocks.push(cube);
+      return cube;
     }
 
-    // Base Terrain Grid
-    const gridSize = 10;
-    for (let x = -gridSize; x <= gridSize; x++) {
-      for (let z = -gridSize; z <= gridSize; z++) {
+    // Larger Terrain Generation
+    const worldSize = 20;
+    for (let x = -worldSize; x <= worldSize; x++) {
+      for (let z = -worldSize; z <= worldSize; z++) {
         createBlock(x, 0, z, 0x556B2F); // Grass
         createBlock(x, -1, z, 0x8B4513); // Dirt
       }
     }
 
-    // Initial Camera Position
-    camera.position.set(0, 3, 5);
+    // Tree Generator
+    function generateTree(x, z) {
+      const height = 3 + Math.floor(Math.random() * 2);
+      for (let i = 1; i <= height; i++) {
+        createBlock(x, i, z, 0x5c4033); // Wood Trunk
+      }
+      for (let lx = -1; lx <= 1; lx++) {
+        for (let lz = -1; lz <= 1; lz++) {
+          for (let ly = height; ly <= height + 2; ly++) {
+            if (!(lx === 0 && lz === 0 && ly === height)) {
+              createBlock(x + lx, ly, z + lz, 0x2e8b57); // Leaves
+            }
+          }
+        }
+      }
+    }
 
-    // 3. Mobile Touch Controls (Camera Drag & Block Click)
-    let selectedColor = 0x8B4513;
-    let isDestroyMode = false;
-    let isDragging = false;
+    // Spawn Random Trees
+    for (let i = 0; i < 12; i++) {
+      const tx = Math.floor(Math.random() * (worldSize * 2 - 4)) - worldSize + 2;
+      const tz = Math.floor(Math.random() * (worldSize * 2 - 4)) - worldSize + 2;
+      generateTree(tx, tz);
+    }
+
+    // 3. Simple Voxel Animals
+    const animals = [];
+    function spawnAnimal(x, z, color) {
+      const animalGroup = new THREE.Group();
+      // Body
+      const bodyGeom = new THREE.BoxGeometry(0.8, 0.6, 1.2);
+      const mat = new THREE.MeshLambertMaterial({ color: color });
+      const body = new THREE.Mesh(bodyGeom, mat);
+      body.position.y = 0.5;
+      animalGroup.add(body);
+
+      // Head
+      const headGeom = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+      const head = new THREE.Mesh(headGeom, mat);
+      head.position.set(0, 0.8, 0.7);
+      animalGroup.add(head);
+
+      animalGroup.position.set(x, 0.5, z);
+      scene.add(animalGroup);
+      animals.push(animalGroup);
+    }
+
+    spawnAnimal(3, 3, 0xffc0cb); // Pig
+    spawnAnimal(-4, -5, 0xf0f0f0); // Sheep
+
+    // 4. Player Movement & Physics
+    const player = {
+      pos: new THREE.Vector3(0, 3, 0),
+      velocity: new THREE.Vector3(),
+      isGrounded: false,
+      height: 1.6
+    };
+    camera.position.copy(player.pos);
+
+    const moveInput = { fwd: 0, bwd: 0, left: 0, right: 0 };
+
+    // D-Pad Touch Listeners
+    function setupDPad(id, key) {
+      const el = document.getElementById(id);
+      el.addEventListener('touchstart', (e) => { e.preventDefault(); moveInput[key] = 1; });
+      el.addEventListener('touchend', (e) => { e.preventDefault(); moveInput[key] = 0; });
+    }
+    setupDPad('btnFwd', 'fwd');
+    setupDPad('btnBwd', 'bwd');
+    setupDPad('btnLeft', 'left');
+    setupDPad('btnRight', 'right');
+
+    document.getElementById('jumpBtn').addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (player.isGrounded) {
+        player.velocity.y = 0.18;
+        player.isGrounded = false;
+      }
+    });
+
+    // Camera Look Controls
+    let lon = 0, lat = 0;
     let previousTouch = { x: 0, y: 0 };
+    let isDragging = false;
     let touchStartTime = 0;
 
-    let lon = 0, lat = 0;
-    let phi = 0, theta = 0;
-
     window.addEventListener('touchstart', (e) => {
-      if (e.target.tagName === 'BUTTON') return;
+      if (e.target.closest('#dpad') || e.target.closest('#ui') || e.target.id === 'jumpBtn') return;
       isDragging = false;
       touchStartTime = Date.now();
       previousTouch.x = e.touches[0].clientX;
@@ -149,43 +273,31 @@
     });
 
     window.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 1) {
-        const deltaX = e.touches[0].clientX - previousTouch.x;
-        const deltaY = e.touches[0].clientY - previousTouch.y;
+      if (e.target.closest('#dpad') || e.target.closest('#ui') || e.target.id === 'jumpBtn') return;
+      const deltaX = e.touches[0].clientX - previousTouch.x;
+      const deltaY = e.touches[0].clientY - previousTouch.y;
 
-        if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
-          isDragging = true;
-        }
+      if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) isDragging = true;
 
-        lon -= deltaX * 0.3;
-        lat += deltaY * 0.3;
-        lat = Math.max(-85, Math.min(85, lat));
+      lon -= deltaX * 0.3;
+      lat += deltaY * 0.3;
+      lat = Math.max(-85, Math.min(85, lat));
 
-        previousTouch.x = e.touches[0].clientX;
-        previousTouch.y = e.touches[0].clientY;
-      }
+      previousTouch.x = e.touches[0].clientX;
+      previousTouch.y = e.touches[0].clientY;
     });
 
     window.addEventListener('touchend', (e) => {
       if (!isDragging && (Date.now() - touchStartTime < 300)) {
-        handleRaycast();
+        if (!e.target.closest('#dpad') && !e.target.closest('#ui') && e.target.id !== 'jumpBtn') {
+          handleRaycast();
+        }
       }
     });
 
-    // Camera Rotation Logic
-    function updateCameraRotation() {
-      phi = THREE.MathUtils.degToRad(90 - lat);
-      theta = THREE.MathUtils.degToRad(lon);
-
-      const target = new THREE.Vector3();
-      target.x = camera.position.x + Math.sin(phi) * Math.cos(theta);
-      target.y = camera.position.y + Math.cos(phi);
-      target.z = camera.position.z + Math.sin(phi) * Math.sin(theta);
-
-      camera.lookAt(target);
-    }
-
-    // 4. Raycasting for Placing/Removing Blocks
+    // Block Interaction
+    let selectedColor = 0x8B4513;
+    let isDestroyMode = false;
     const raycaster = new THREE.Raycaster();
     const centerVector = new THREE.Vector2(0, 0);
 
@@ -195,7 +307,6 @@
 
       if (intersects.length > 0) {
         const intersect = intersects[0];
-
         if (isDestroyMode) {
           blockGroup.remove(intersect.object);
           const index = blocks.indexOf(intersect.object);
@@ -208,32 +319,75 @@
       }
     }
 
-    // UI Functions
     function selectBlock(color, btn) {
       selectedColor = color;
-      document.querySelectorAll('.btn').forEach(b => {
-        if(b.id !== 'modeBtn') b.classList.remove('active');
-      });
+      document.querySelectorAll('#ui .btn').forEach(b => { if(b.id !== 'modeBtn') b.classList.remove('active'); });
       btn.classList.add('active');
     }
 
     function toggleMode(btn) {
       isDestroyMode = !isDestroyMode;
-      btn.innerText = isDestroyMode ? "Mode: Break" : "Mode: Build";
+      btn.innerText = isDestroyMode ? "Break" : "Build";
       btn.style.borderColor = isDestroyMode ? "#ff4444" : "white";
     }
 
-    // Resize Handler
+    // 5. Game Loop & Physics Update
+    const gravity = 0.008;
+
+    function updatePhysics() {
+      // Rotation vectors
+      const phi = THREE.MathUtils.degToRad(90 - lat);
+      const theta = THREE.MathUtils.degToRad(lon);
+
+      const forward = new THREE.Vector3(Math.cos(theta), 0, Math.sin(theta)).normalize();
+      const side = new THREE.Vector3(-Math.sin(theta), 0, Math.cos(theta)).normalize();
+
+      // Movement Vector
+      const moveDir = new THREE.Vector3();
+      if (moveInput.fwd) moveDir.add(forward);
+      if (moveInput.bwd) moveDir.sub(forward);
+      if (moveInput.right) moveDir.add(side);
+      if (moveInput.left) moveDir.sub(side);
+      moveDir.normalize().multiplyScalar(0.08);
+
+      player.pos.add(moveDir);
+
+      // Apply Gravity
+      player.velocity.y -= gravity;
+      player.pos.y += player.velocity.y;
+
+      // Ground Collision (Simplistic floor check at y = 1.6 above blocks)
+      if (player.pos.y < 1.6) {
+        player.pos.y = 1.6;
+        player.velocity.y = 0;
+        player.isGrounded = true;
+      }
+
+      // Update Camera Position & Direction
+      camera.position.copy(player.pos);
+      const target = new THREE.Vector3(
+        player.pos.x + Math.sin(phi) * Math.cos(theta),
+        player.pos.y + Math.cos(phi),
+        player.pos.z + Math.sin(phi) * Math.sin(theta)
+      );
+      camera.lookAt(target);
+
+      // Simple Animal Movement
+      animals.forEach(a => {
+        a.position.x += (Math.random() - 0.5) * 0.01;
+        a.position.z += (Math.random() - 0.5) * 0.01;
+      });
+    }
+
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Render Loop
     function animate() {
       requestAnimationFrame(animate);
-      updateCameraRotation();
+      updatePhysics();
       renderer.render(scene, camera);
     }
     animate();
