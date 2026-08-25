@@ -1,16 +1,23 @@
 {
+  "id": "/",
   "name": "CraftX 3D Game",
   "short_name": "CraftX",
-  "start_url": "./index.html",
+  "description": "3D Voxel Building Game",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#87ceeb",
   "theme_color": "#87ceeb",
-  "description": "3D Voxel Building Game",
+  "categories": ["games", "entertainment"],
   "icons": [
     {
       "src": "https://via.placeholder.com/512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
