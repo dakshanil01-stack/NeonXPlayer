@@ -1,130 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>CraftX - 3D Voxel Game</title>
-    <link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
-    <style>
-        body { margin: 0; overflow: hidden; font-family: sans-serif; user-select: none; }
-        #crosshair {
-            position: absolute; top: 50%; left: 50%;
-            width: 10px; height: 10px; background: white;
-            transform: translate(-50%, -50%); border-radius: 50%;
-            pointer-events: none; border: 1px solid black;
-        }
-        #ui {
-            position: absolute; bottom: 20px; left: 50%;
-            transform: translateX(-50%); display: flex; gap: 10px;
-        }
-        .btn {
-            padding: 12px 20px; background: rgba(0,0,0,0.6);
-            color: white; border: 1px solid #fff; border-radius: 8px; font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>CraftX 3D Game</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      background: #87ceeb;
+    }
+    #crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+    #ui {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .btn {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: 2px solid white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn.active {
+      border-color: #ff0;
+      background: rgba(255, 255, 0, 0.3);
+    }
+    #instructions {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 10;
+      pointer-events: none;
+    }
+  </style>
+  <!-- Three.js engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <div id="crosshair"></div>
-    <div id="ui">
-        <button class="btn" onclick="setBlockType(1)">Dirt</button>
-        <button class="btn" onclick="setBlockType(2)">Grass</button>
-        <button class="btn" onclick="setBlockType(3)">Stone</button>
-    </div>
 
-    <!-- Three.js Engine -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // 1. Scene & Camera Setup
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x87ceeb); // Sky color
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+  <div id="crosshair"></div>
+  <div id="instructions">Drag screen to look around | Tap to place/remove</div>
+  
+  <div id="ui">
+    <button class="btn active" onclick="selectBlock(0x8B4513, this)">Dirt</button>
+    <button class="btn" onclick="selectBlock(0x556B2F, this)">Grass</button>
+    <button class="btn" onclick="selectBlock(0x808080, this)">Stone</button>
+    <button class="btn" onclick="toggleMode(this)" id="modeBtn">Mode: Build</button>
+  </div>
 
-        // Lighting
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(10, 20, 15);
-        scene.add(light);
-        scene.add(new THREE.AmbientLight(0x404040));
+  <script>
+    // 1. Scene, Camera, Renderer Setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x87ceeb);
+    scene.fog = new THREE.FogExp2(0x87ceeb, 0.03);
 
-        // 2. Textures / Materials
-        const materials = {
-            1: new THREE.MeshLambertMaterial({ color: 0x8B4513 }), // Dirt
-            2: new THREE.MeshLambertMaterial({ color: 0x556B2F }), // Grass
-            3: new THREE.MeshLambertMaterial({ color: 0x808080 })  // Stone
-        };
-        const boxGeo = new THREE.BoxGeometry(1, 1, 1);
-        let selectedBlock = 1;
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
 
-        // 3. World Generation (Simple Flat World)
-        const blocks = [];
-        for (let x = -8; x <= 8; x++) {
-            for (let z = -8; z <= 8; z++) {
-                const mesh = new THREE.Mesh(boxGeo, materials[2]);
-                mesh.position.set(x, 0, z);
-                scene.add(mesh);
-                blocks.push(mesh);
-            }
+    // Lightings
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    scene.add(ambientLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    dirLight.position.set(20, 40, 20);
+    scene.add(dirLight);
+
+    // 2. World Generation
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const blocks = [];
+    const blockGroup = new THREE.Group();
+    scene.add(blockGroup);
+
+    function createBlock(x, y, z, color) {
+      const material = new THREE.MeshLambertMaterial({ color: color });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.set(x, y, z);
+      
+      // Wireframe border for voxel look
+      const edges = new THREE.EdgesGeometry(geometry);
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+      cube.add(line);
+
+      blockGroup.add(cube);
+      blocks.push(cube);
+    }
+
+    // Base Terrain Grid
+    const gridSize = 10;
+    for (let x = -gridSize; x <= gridSize; x++) {
+      for (let z = -gridSize; z <= gridSize; z++) {
+        createBlock(x, 0, z, 0x556B2F); // Grass
+        createBlock(x, -1, z, 0x8B4513); // Dirt
+      }
+    }
+
+    // Initial Camera Position
+    camera.position.set(0, 3, 5);
+
+    // 3. Mobile Touch Controls (Camera Drag & Block Click)
+    let selectedColor = 0x8B4513;
+    let isDestroyMode = false;
+    let isDragging = false;
+    let previousTouch = { x: 0, y: 0 };
+    let touchStartTime = 0;
+
+    let lon = 0, lat = 0;
+    let phi = 0, theta = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.target.tagName === 'BUTTON') return;
+      isDragging = false;
+      touchStartTime = Date.now();
+      previousTouch.x = e.touches[0].clientX;
+      previousTouch.y = e.touches[0].clientY;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const deltaX = e.touches[0].clientX - previousTouch.x;
+        const deltaY = e.touches[0].clientY - previousTouch.y;
+
+        if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+          isDragging = true;
         }
 
-        camera.position.set(0, 2, 5);
+        lon -= deltaX * 0.3;
+        lat += deltaY * 0.3;
+        lat = Math.max(-85, Math.min(85, lat));
 
-        // 4. Controls & Touch Interaction
-        let raycaster = new THREE.Raycaster();
-        let mouse = new THREE.Vector2(0, 0); // Center screen raycast
+        previousTouch.x = e.touches[0].clientX;
+        previousTouch.y = e.touches[0].clientY;
+      }
+    });
 
-        window.addEventListener('click', (e) => {
-            // Ignore UI Button clicks
-            if (e.target.tagName === 'BUTTON') return;
+    window.addEventListener('touchend', (e) => {
+      if (!isDragging && (Date.now() - touchStartTime < 300)) {
+        handleRaycast();
+      }
+    });
 
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects(blocks);
+    // Camera Rotation Logic
+    function updateCameraRotation() {
+      phi = THREE.MathUtils.degToRad(90 - lat);
+      theta = THREE.MathUtils.degToRad(lon);
 
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                
-                // Left Click / Tap -> Add Block
-                if (e.button === 0) {
-                    const newBlock = new THREE.Mesh(boxGeo, materials[selectedBlock]);
-                    const normal = intersect.face.normal;
-                    newBlock.position.copy(intersect.object.position).add(normal);
-                    scene.add(newBlock);
-                    blocks.push(newBlock);
-                } 
-                // Right Click -> Break Block
-                else if (e.button === 2) {
-                    scene.remove(intersect.object);
-                    blocks.splice(blocks.indexOf(intersect.object), 1);
-                }
-            }
-        });
+      const target = new THREE.Vector3();
+      target.x = camera.position.x + Math.sin(phi) * Math.cos(theta);
+      target.y = camera.position.y + Math.cos(phi);
+      target.z = camera.position.z + Math.sin(phi) * Math.sin(theta);
 
-        // Disable context menu for right click mining
-        window.addEventListener('contextmenu', e => e.preventDefault());
+      camera.lookAt(target);
+    }
 
-        function setBlockType(type) {
-            selectedBlock = type;
+    // 4. Raycasting for Placing/Removing Blocks
+    const raycaster = new THREE.Raycaster();
+    const centerVector = new THREE.Vector2(0, 0);
+
+    function handleRaycast() {
+      raycaster.setFromCamera(centerVector, camera);
+      const intersects = raycaster.intersectObjects(blocks);
+
+      if (intersects.length > 0) {
+        const intersect = intersects[0];
+
+        if (isDestroyMode) {
+          blockGroup.remove(intersect.object);
+          const index = blocks.indexOf(intersect.object);
+          if (index > -1) blocks.splice(index, 1);
+        } else {
+          const normal = intersect.face.normal;
+          const newPos = intersect.object.position.clone().add(normal);
+          createBlock(newPos.x, newPos.y, newPos.z, selectedColor);
         }
+      }
+    }
 
-        // 5. Game Loop
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
+    // UI Functions
+    function selectBlock(color, btn) {
+      selectedColor = color;
+      document.querySelectorAll('.btn').forEach(b => {
+        if(b.id !== 'modeBtn') b.classList.remove('active');
+      });
+      btn.classList.add('active');
+    }
 
-        // Responsive Resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
+    function toggleMode(btn) {
+      isDestroyMode = !isDestroyMode;
+      btn.innerText = isDestroyMode ? "Mode: Break" : "Mode: Build";
+      btn.style.borderColor = isDestroyMode ? "#ff4444" : "white";
+    }
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Render Loop
+    function animate() {
+      requestAnimationFrame(animate);
+      updateCameraRotation();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
 </body>
 </html>
