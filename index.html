@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CraftX - 3D Voxel Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: sans-serif; user-select: none; }
+        #crosshair {
+            position: absolute; top: 50%; left: 50%;
+            width: 10px; height: 10px; background: white;
+            transform: translate(-50%, -50%); border-radius: 50%;
+            pointer-events: none; border: 1px solid black;
+        }
+        #ui {
+            position: absolute; bottom: 20px; left: 50%;
+            transform: translateX(-50%); display: flex; gap: 10px;
+        }
+        .btn {
+            padding: 12px 20px; background: rgba(0,0,0,0.6);
+            color: white; border: 1px solid #fff; border-radius: 8px; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="crosshair"></div>
+    <div id="ui">
+        <button class="btn" onclick="setBlockType(1)">Dirt</button>
+        <button class="btn" onclick="setBlockType(2)">Grass</button>
+        <button class="btn" onclick="setBlockType(3)">Stone</button>
+    </div>
 
+    <!-- Three.js Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 1. Scene & Camera Setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x87ceeb); // Sky color
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Lighting
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(10, 20, 15);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        // 2. Textures / Materials
+        const materials = {
+            1: new THREE.MeshLambertMaterial({ color: 0x8B4513 }), // Dirt
+            2: new THREE.MeshLambertMaterial({ color: 0x556B2F }), // Grass
+            3: new THREE.MeshLambertMaterial({ color: 0x808080 })  // Stone
+        };
+        const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+        let selectedBlock = 1;
+
+        // 3. World Generation (Simple Flat World)
+        const blocks = [];
+        for (let x = -8; x <= 8; x++) {
+            for (let z = -8; z <= 8; z++) {
+                const mesh = new THREE.Mesh(boxGeo, materials[2]);
+                mesh.position.set(x, 0, z);
+                scene.add(mesh);
+                blocks.push(mesh);
+            }
+        }
+
+        camera.position.set(0, 2, 5);
+
+        // 4. Controls & Touch Interaction
+        let raycaster = new THREE.Raycaster();
+        let mouse = new THREE.Vector2(0, 0); // Center screen raycast
+
+        window.addEventListener('click', (e) => {
+            // Ignore UI Button clicks
+            if (e.target.tagName === 'BUTTON') return;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(blocks);
+
+            if (intersects.length > 0) {
+                const intersect = intersects[0];
+                
+                // Left Click / Tap -> Add Block
+                if (e.button === 0) {
+                    const newBlock = new THREE.Mesh(boxGeo, materials[selectedBlock]);
+                    const normal = intersect.face.normal;
+                    newBlock.position.copy(intersect.object.position).add(normal);
+                    scene.add(newBlock);
+                    blocks.push(newBlock);
+                } 
+                // Right Click -> Break Block
+                else if (e.button === 2) {
+                    scene.remove(intersect.object);
+                    blocks.splice(blocks.indexOf(intersect.object), 1);
+                }
+            }
+        });
+
+        // Disable context menu for right click mining
+        window.addEventListener('contextmenu', e => e.preventDefault());
+
+        function setBlockType(type) {
+            selectedBlock = type;
+        }
+
+        // 5. Game Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Responsive Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
