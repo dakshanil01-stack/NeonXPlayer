@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Neon XPlayer</string>
-    <string name="title_activity_main">Neon XPlayer</string>
-    <string name="package_name">com.neon.xplayer</string>
-    <string name="custom_url_scheme">com.neon.xplayer</string>
-</resources>
