@@ -3,30 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Scrape Data</title>
+    <title>NeonX Scraper & Search Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-900 text-white p-6">
-    <h1 class="text-2xl font-bold mb-4 text-cyan-400">Live Scraped Data</h1>
-    <div id="content" class="grid gap-4">Loading...</div>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
 
+    <!-- Header Section -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-cyan-500 to-blue-600 p-2.5 rounded-xl shadow-lg shadow-cyan-500/20">
+                    <i class="fa-solid fa-bolt text-xl text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    NeonX Engine
+                </h1>
+            </div>
+            <div id="liveStatus" class="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Engine Ready
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Search & Control Panel -->
+        <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl mb-8">
+            <h2 class="text-2xl font-bold text-center mb-2">Unlimited Topic Search & Scraper</h2>
+            <p class="text-slate-400 text-center text-sm mb-6">Type any topic or category to fetch live aggregated web data instantly.</p>
+            
+            <form id="searchForm" class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                    <input type="text" id="searchInput" placeholder="Search topic (e.g. AI, Crypto, Web Dev, Cricket)..." required
+                        class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-cyan-500 transition text-white">
+                </div>
+                <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-filter"></i> Fetch Data
+                </button>
+            </form>
+
+            <!-- Quick Categories -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6">
+                <button onclick="quickSearch('Technology')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># Technology</button>
+                <button onclick="quickSearch('Programming')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># Programming</button>
+                <button onclick="quickSearch('Artificial Intelligence')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># AI Trends</button>
+                <button onclick="quickSearch('World News')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># World News</button>
+            </div>
+        </section>
+
+        <!-- Results Grid -->
+        <section>
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="resultTitle" class="text-lg font-semibold text-slate-200">Featured Web Scrapes</h3>
+                <span id="itemCount" class="text-xs font-medium bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md">0 results</span>
+            </div>
+
+            <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Data cards will render here dynamically -->
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="hidden text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-cyan-500 border-t-transparent"></div>
+                <p class="text-sm text-slate-400 mt-3">Scraping web sources...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Logic Script -->
     <script>
-        fetch('https://raw.githubusercontent.com/dakshanil01-stack/NeonXPlayer/main/data.json')
-            .then(res => res.json())
-            .then(data => {
-                const container = document.getElementById('content');
-                container.innerHTML = '';
-                data.forEach(item => {
-                    container.innerHTML += `
-                        <a href="${item.url}" target="_blank" class="p-4 bg-slate-800 rounded-lg hover:bg-slate-700 transition block">
-                            <p class="font-semibold">${item.id}. ${item.title}</p>
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const resultsGrid = document.getElementById('resultsGrid');
+        const loader = document.getElementById('loader');
+        const resultTitle = document.getElementById('resultTitle');
+        const itemCount = document.getElementById('itemCount');
+
+        // Initial Load (Default Trending Data)
+        window.onload = () => {
+            fetchTopicData('Trending Technology');
+        };
+
+        searchForm.onsubmit = (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) fetchTopicData(query);
+        };
+
+        function quickSearch(topic) {
+            searchInput.value = topic;
+            fetchTopicData(topic);
+        }
+
+        async function fetchTopicData(query) {
+            resultsGrid.innerHTML = '';
+            loader.classList.remove('hidden');
+            resultTitle.innerText = `Results for "${query}"`;
+
+            try {
+                // Fetching via DuckDuckGo Public Instant Search API
+                const res = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&origin=*`);
+                const data = await res.json();
+                
+                loader.classList.add('hidden');
+                let results = [];
+
+                if (data.RelatedTopics) {
+                    data.RelatedTopics.forEach(item => {
+                        if (item.Text && item.FirstURL) {
+                            results.push({
+                                title: item.Text,
+                                url: item.FirstURL,
+                                category: query
+                            });
+                        } else if (item.Topics) {
+                            item.Topics.forEach(subItem => {
+                                results.push({
+                                    title: subItem.Text,
+                                    url: subItem.FirstURL,
+                                    category: query
+                                });
+                            });
+                        }
+                    });
+                }
+
+                if (results.length === 0) {
+                    resultsGrid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">No live data found for this topic. Try another search!</div>`;
+                    itemCount.innerText = `0 results`;
+                    return;
+                }
+
+                itemCount.innerText = `${results.length} results`;
+
+                results.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/5 transition flex flex-col justify-between group';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">
+                                    ${item.category}
+                                </span>
+                                <span class="text-xs text-slate-500">#${index + 1}</span>
+                            </div>
+                            <p class="text-sm text-slate-300 font-medium line-clamp-3 group-hover:text-white transition">
+                                ${item.title}
+                            </p>
+                        </div>
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" 
+                           class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition">
+                           Read Full Source <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </a>
                     `;
+                    resultsGrid.appendChild(card);
                 });
-            })
-            .catch(err => {
-                document.getElementById('content').innerText = 'Data load hone me issue aaya. Ensure scraper script Has run once!';
-            });
+
+            } catch (err) {
+                loader.classList.add('hidden');
+                resultsGrid.innerHTML = `<div class="col-span-full text-center py-8 text-rose-500">Error fetching live data. Please try again!</div>`;
+            }
+        }
     </script>
 </body>
 </html>
