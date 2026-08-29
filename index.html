@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="h-cMZdDV4jUlnwWcpUtezKzhc_cB-mBcjEewGIswJmY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeonX Scraper & Search Hub</title>
+    
+    <!-- Essential SEO Meta Tags -->
+    <title>NeonX Engine - Live Web Scraper & Unlimited Search Hub</title>
+    <meta name="description" content="Discover live trending topics, technology updates, news, and custom search results instantly using NeonX Engine - Free Unlimited Web Scraper Hub.">
+    <meta name="keywords" content="web scraper, live search engine, trending topics, technology news, neonx engine">
+    <meta name="robots" content="index, follow">
+
+    <!-- CSS Frameworks & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -59,17 +67,27 @@
         <section>
             <div class="flex items-center justify-between mb-4">
                 <h3 id="resultTitle" class="text-lg font-semibold text-slate-200">Featured Web Scrapes</h3>
-                <span id="itemCount" class="text-xs font-medium bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md">0 results</span>
+                <span id="itemCount" class="text-xs font-medium bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md">Live Engine</span>
             </div>
 
             <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Data cards will render here dynamically -->
+                <!-- Static Fallback Cards to prevent Soft 404 in Google Search Console -->
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                    <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">System Info</span>
+                    <h4 class="font-bold text-white mt-2 mb-1">Live Web Scraper & Crawler</h4>
+                    <p class="text-xs text-slate-400">Search any category like AI, Tech, Programming, or News to fetch real-time indexed data instantly.</p>
+                </article>
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                    <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">Features</span>
+                    <h4 class="font-bold text-white mt-2 mb-1">Unlimited Free Searches</h4>
+                    <p class="text-xs text-slate-400">Fast client-side fetching with zero rate limits for multi-user real-time query results.</p>
+                </article>
             </div>
 
             <!-- Loader -->
             <div id="loader" class="hidden text-center py-12">
                 <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-cyan-500 border-t-transparent"></div>
-                <p class="text-sm text-slate-400 mt-3">Scraping web sources...</p>
+                <p class="text-sm text-slate-400 mt-3">Scraping live web sources...</p>
             </div>
         </section>
     </main>
