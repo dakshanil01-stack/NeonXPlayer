@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "title": "SQLite as a Document Database (2020)",
+        "url": "https://dgl.cx/2020/06/sqlite-json-support"
+    },
+    {
+        "id": 2,
+        "title": "Tether: iMessage, SMS, etc. on Linux",
+        "url": "https://zackbartel.com/blog/2026/08/tether/"
+    },
+    {
+        "id": 3,
+        "title": "Calibrate Before You Accelerate: Bias Toward Action in a New Role",
+        "url": "https://tucker.wales/writing/bias-towards-action/"
+    },
+    {
+        "id": 4,
+        "title": "Sleepwalker: Passive Backdoor with Its Own Command Language",
+        "url": "https://r136a1.dev/2026/08/24/sleepwalker-a-passive-backdoor-with-its-own-command-language/"
+    },
+    {
+        "id": 5,
+        "title": "Indirect Calling of Nested Functions on GCC Without Executable Stack",
+        "url": "https://uecker.codeberg.page/2026-08-29.html"
+    },
+    {
+        "id": 6,
+        "title": "Show HN: Typebase \u2013 A single-folder back end you write in TypeScript",
+        "url": "https://typebase.io"
+    },
+    {
+        "id": 7,
+        "title": "Vim's UserGettingBored Autocmd",
+        "url": "https://evanhahn.com/usergettingbored-vim/"
+    },
+    {
+        "id": 8,
+        "title": "Glacier Mice",
+        "url": "https://en.wikipedia.org/wiki/Glacier_mice"
+    },
+    {
+        "id": 9,
+        "title": "Samsung's Processing-in-Memory (PIM)",
+        "url": "https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing"
+    },
+    {
+        "id": 10,
+        "title": "Quantifying Colour",
+        "url": "https://ekunazanu.foo/lab/quantifying-colour/"
+    }
+]
