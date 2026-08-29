@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scrape Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white p-6">
+    <h1 class="text-2xl font-bold mb-4 text-cyan-400">Live Scraped Data</h1>
+    <div id="content" class="grid gap-4">Loading...</div>
+
+    <script>
+        fetch('https://raw.githubusercontent.com/dakshanil01-stack/NeonXPlayer/main/data.json')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('content');
+                container.innerHTML = '';
+                data.forEach(item => {
+                    container.innerHTML += `
+                        <a href="${item.url}" target="_blank" class="p-4 bg-slate-800 rounded-lg hover:bg-slate-700 transition block">
+                            <p class="font-semibold">${item.id}. ${item.title}</p>
+                        </a>
+                    `;
+                });
+            })
+            .catch(err => {
+                document.getElementById('content').innerText = 'Data load hone me issue aaya. Ensure scraper script Has run once!';
+            });
+    </script>
+</body>
+</html>
