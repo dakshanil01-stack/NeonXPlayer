@@ -1,52 +1,52 @@
 [
     {
         "id": 1,
-        "title": "Bug Blindness",
-        "url": "https://danluu.com/bug-blind/"
+        "title": "Longest Straight Line Paths on Water or Land on the Earth (2018)",
+        "url": "https://arxiv.org/abs/1804.07389"
     },
     {
         "id": 2,
-        "title": "Algorithmic Rent-Pricing Litigation Expands Under New State and Local Laws",
-        "url": "https://www.morganlewis.com/pubs/2026/08/algorithmic-rent-pricing-litigation-expands-under-new-state-and-local-laws"
+        "title": "Arbitrary code execution in QubesOS via copy-to-VM error reporting backchannel",
+        "url": "https://www.qubes-os.org/news/2026/08/29/qsb-118/"
     },
     {
         "id": 3,
-        "title": "Hy4 preview",
-        "url": "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/"
+        "title": "Spark: Sparklines in your shell",
+        "url": "https://git.zx2c4.com/spark/about/"
     },
     {
         "id": 4,
+        "title": "Everyone Should Build Their Own Network Stack",
+        "url": "https://blog.lyc8503.net/en/post/dn42-2-dnet/"
+    },
+    {
+        "id": 5,
+        "title": "Brits would quite like their private messages to stay private",
+        "url": "https://www.theregister.com/security/2026/08/30/turns-out-brits-would-quite-like-their-private-messages-to-stay-private/5292994"
+    },
+    {
+        "id": 6,
         "title": "RISC-V is now officially supported by CPython",
         "url": "https://blog.python.org/2026/08/riscv-now-officially-supported/"
     },
     {
-        "id": 5,
-        "title": "FreeCORE TrueNAS Core \u2013 Continued",
-        "url": "https://freecore.org/"
-    },
-    {
-        "id": 6,
-        "title": "Tether: iMessage, SMS, etc. on Linux",
-        "url": "https://zackbartel.com/blog/2026/08/tether/"
-    },
-    {
         "id": 7,
-        "title": "Show HN: I missed the moving blocks, so I built a real Linux disk defragmenter",
-        "url": "https://github.com/gbin/defragger"
+        "title": "My life was changed by four sentences in four books",
+        "url": "https://sive.rs/4s4b"
     },
     {
         "id": 8,
-        "title": "Nancy Grace Roman Space Telescope",
-        "url": "https://science.nasa.gov/mission/roman-space-telescope/"
+        "title": "Hy4 preview",
+        "url": "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/"
     },
     {
         "id": 9,
-        "title": "Creating Teensy ELF Executables for Linux (Or, \"Size Is Everything\")",
-        "url": "https://www.muppetlabs.com/~breadbox/software/tiny/teensy.html"
+        "title": "Xcena and Samsung's Near Memory Compute CXL Device",
+        "url": "https://chipsandcheese.com/p/hot-chips-2026-xcena-and-samsungs"
     },
     {
         "id": 10,
-        "title": "Benjamin Franklin's Alter Egos Gave Him the Most Freedom",
-        "url": "https://www.smithsonianmag.com/history/among-all-great-things-benjamin-franklin-invented-discovered-alter-egos-gave-him-most-freedom-180988824/"
+        "title": "JupyterGIS 0.16: a grammar of graphics for maps, and collaborative story maps",
+        "url": "https://blog.jupyter.org/jupytergis-0-16-new-visualization-capabilities-collaborative-story-maps-and-more-03e6b78bacc0"
     }
 ]
