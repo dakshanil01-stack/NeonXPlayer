@@ -1,52 +1,52 @@
 [
     {
         "id": 1,
-        "title": "Longest Straight Line Paths on Water or Land on the Earth (2018)",
-        "url": "https://arxiv.org/abs/1804.07389"
+        "title": "Creepy Crawlies",
+        "url": "https://people.kernel.org/monsieuricon/creepy-crawlies"
     },
     {
         "id": 2,
+        "title": "Haiku R1/beta6 has been released",
+        "url": "https://www.haiku-os.org/news/2026-08-26_haiku_r1_beta6"
+    },
+    {
+        "id": 3,
+        "title": "Hacking IKEA Furniture",
+        "url": "https://greenlightning.eu/diy/hacking-ikea-furniture/"
+    },
+    {
+        "id": 4,
+        "title": "Casey Muratori \u2013 The Root of the Root of All Evil \u2013 BSC 2026 [video]",
+        "url": "https://www.youtube.com/watch?v=hpj6r6CjJf8"
+    },
+    {
+        "id": 5,
+        "title": "Coordination Headwind: How Organizations Are Like Slime Molds",
+        "url": "https://komoroske.com/slime-mold/"
+    },
+    {
+        "id": 6,
+        "title": "European Commission Revives Push for Encryption Backdoors in ProtectEU Strategy",
+        "url": "https://reclaimthenet.org/eu-protecteu-strategy-encryption-backdoor-law-enforcement"
+    },
+    {
+        "id": 7,
+        "title": "Omarchy: Any User Process Can Escalate to Root",
+        "url": "https://0xcc.io/posts/omarchy-root-creds/"
+    },
+    {
+        "id": 8,
         "title": "Arbitrary code execution in QubesOS via copy-to-VM error reporting backchannel",
         "url": "https://www.qubes-os.org/news/2026/08/29/qsb-118/"
     },
     {
-        "id": 3,
-        "title": "Spark: Sparklines in your shell",
-        "url": "https://git.zx2c4.com/spark/about/"
-    },
-    {
-        "id": 4,
-        "title": "Everyone Should Build Their Own Network Stack",
-        "url": "https://blog.lyc8503.net/en/post/dn42-2-dnet/"
-    },
-    {
-        "id": 5,
-        "title": "Brits would quite like their private messages to stay private",
-        "url": "https://www.theregister.com/security/2026/08/30/turns-out-brits-would-quite-like-their-private-messages-to-stay-private/5292994"
-    },
-    {
-        "id": 6,
-        "title": "RISC-V is now officially supported by CPython",
-        "url": "https://blog.python.org/2026/08/riscv-now-officially-supported/"
-    },
-    {
-        "id": 7,
-        "title": "My life was changed by four sentences in four books",
-        "url": "https://sive.rs/4s4b"
-    },
-    {
-        "id": 8,
-        "title": "Hy4 preview",
-        "url": "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/"
-    },
-    {
         "id": 9,
-        "title": "Xcena and Samsung's Near Memory Compute CXL Device",
-        "url": "https://chipsandcheese.com/p/hot-chips-2026-xcena-and-samsungs"
+        "title": "Longest Straight Line Paths on Water or Land on the Earth (2018)",
+        "url": "https://arxiv.org/abs/1804.07389"
     },
     {
         "id": 10,
-        "title": "JupyterGIS 0.16: a grammar of graphics for maps, and collaborative story maps",
-        "url": "https://blog.jupyter.org/jupytergis-0-16-new-visualization-capabilities-collaborative-story-maps-and-more-03e6b78bacc0"
+        "title": "Europe's summer drought is so extreme that desertification is a growing threat",
+        "url": "https://fortune.com/2026/08/29/europe-summer-drought-desertification-threat-rivers-fish/"
     }
 ]
