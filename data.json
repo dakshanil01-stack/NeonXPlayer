@@ -1,52 +1,52 @@
 [
     {
         "id": 1,
+        "title": "\u201cI just chose words carefully\u201d",
+        "url": "https://unsung.aresluna.org/i-just-chose-words-carefully/"
+    },
+    {
+        "id": 2,
+        "title": "P99 0 ms* autocomplete for 240M domain names",
+        "url": "https://ruurtjan.com/articles/p99-0ms-autocomplete-for-240-million-domain-names"
+    },
+    {
+        "id": 3,
         "title": "Creepy Crawlies",
         "url": "https://people.kernel.org/monsieuricon/creepy-crawlies"
     },
     {
-        "id": 2,
+        "id": 4,
+        "title": "It takes 5 cloud services to hear my doorbell",
+        "url": "https://blog.vghaisas.com/rube-goldberg-doorbell/"
+    },
+    {
+        "id": 5,
+        "title": "The EU has begun enforcing the AI Act: first RFIs to model providers",
+        "url": "https://tokenstead.ai/guides/eu-ai-act-first-enforcement-security-rfis"
+    },
+    {
+        "id": 6,
+        "title": "Matrox: Graphics for Professionals",
+        "url": "https://www.abortretry.fail/p/matrox"
+    },
+    {
+        "id": 7,
         "title": "Haiku R1/beta6 has been released",
         "url": "https://www.haiku-os.org/news/2026-08-26_haiku_r1_beta6"
     },
     {
-        "id": 3,
-        "title": "Cores in space: The core memory module from a 1980 Spacelab computer",
-        "url": "https://www.righto.com/2026/08/spacelab-core-memory.html"
-    },
-    {
-        "id": 4,
-        "title": "Coordination Headwind: How Organizations Are Like Slime Molds",
-        "url": "https://komoroske.com/slime-mold/"
-    },
-    {
-        "id": 5,
-        "title": "Sort branches by last commit date",
-        "url": "https://ryangreenberg.com/til/git-branches-by-commit-date/"
-    },
-    {
-        "id": 6,
-        "title": "Why open source rocks \u2013 a new SM750 (Silicon Motion GPU) HDMI Driver",
-        "url": "https://github.com/KodeMunkie/sm750hdmifb"
-    },
-    {
-        "id": 7,
-        "title": "METR and Redwood Offer Holy %^ Postmortem of the HuggingFace Hack",
-        "url": "https://thezvi.wordpress.com/2026/08/29/metr-and-redwood-offer-holy-postmortem-of-the-huggingface-hack/"
-    },
-    {
         "id": 8,
-        "title": "Hacking IKEA Furniture",
-        "url": "https://greenlightning.eu/diy/hacking-ikea-furniture/"
+        "title": "My hobby of building miniatures and taking pretty pictures",
+        "url": "https://sandyuraz.com/blogs/tiny-cafe/"
     },
     {
         "id": 9,
-        "title": "NFC Energy-Harvesting PCB Business Card with an MCU",
-        "url": "https://wilsonharper.net/projects/businesscard/"
+        "title": "Understanding ChatGPT Work",
+        "url": "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/"
     },
     {
         "id": 10,
-        "title": "Zig: Pointer Stability for ArrayLists",
-        "url": "https://ziglang.org/devlog/2026/#2026-08-27"
+        "title": "Internet centralization and the original sin of NAT",
+        "url": "https://dreamstation.systems/personal/ntppost.html"
     }
 ]
