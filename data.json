@@ -1,38 +1,38 @@
 [
     {
         "id": 1,
+        "title": "OpenShot 4.0: Record, Edit, and Color Like Never Before",
+        "url": "https://www.openshot.org/blog/2026/08/30/openshot-40-record-edit-color-like-never-before/"
+    },
+    {
+        "id": 2,
         "title": "\u201cI just chose words carefully\u201d",
         "url": "https://unsung.aresluna.org/i-just-chose-words-carefully/"
     },
     {
-        "id": 2,
-        "title": "P99 0 ms* autocomplete for 240M domain names",
-        "url": "https://ruurtjan.com/articles/p99-0ms-autocomplete-for-240-million-domain-names"
-    },
-    {
         "id": 3,
-        "title": "Creepy Crawlies",
-        "url": "https://people.kernel.org/monsieuricon/creepy-crawlies"
+        "title": "Breaking Claude Code Opus 5 Auto Mode",
+        "url": "https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/"
     },
     {
         "id": 4,
-        "title": "It takes 5 cloud services to hear my doorbell",
-        "url": "https://blog.vghaisas.com/rube-goldberg-doorbell/"
+        "title": "Agent Memory as a File Format",
+        "url": "https://calpaterson.com/memoryfields.html"
     },
     {
         "id": 5,
-        "title": "The EU has begun enforcing the AI Act: first RFIs to model providers",
-        "url": "https://tokenstead.ai/guides/eu-ai-act-first-enforcement-security-rfis"
+        "title": "What I Learned About AI Trust from Reconciling over 100B Transactions",
+        "url": "https://engineering.moniepoint.com/what-i-learned-about-ai-trust-from-reconciling"
     },
     {
         "id": 6,
-        "title": "Matrox: Graphics for Professionals",
-        "url": "https://www.abortretry.fail/p/matrox"
+        "title": "Malleable software = solid bases and custom code",
+        "url": "https://www.mdubakov.me/malleable-software-solid-bases-custom-code/"
     },
     {
         "id": 7,
-        "title": "Haiku R1/beta6 has been released",
-        "url": "https://www.haiku-os.org/news/2026-08-26_haiku_r1_beta6"
+        "title": "Notes on Private Trackers",
+        "url": "https://www.jenn.site/notes-on-private-trackers/"
     },
     {
         "id": 8,
@@ -41,12 +41,12 @@
     },
     {
         "id": 9,
-        "title": "Understanding ChatGPT Work",
-        "url": "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/"
+        "title": "uv: Deduplicate all files in the wheel cache",
+        "url": "https://github.com/astral-sh/uv/pull/21327"
     },
     {
         "id": 10,
-        "title": "Internet centralization and the original sin of NAT",
-        "url": "https://dreamstation.systems/personal/ntppost.html"
+        "title": "P99 0 ms* autocomplete for 240M domain names",
+        "url": "https://ruurtjan.com/articles/p99-0ms-autocomplete-for-240-million-domain-names"
     }
 ]
