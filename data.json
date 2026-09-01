@@ -6,47 +6,47 @@
     },
     {
         "id": 2,
+        "title": "Ask HN: Who is hiring? (September 2026)",
+        "url": "item?id=49522897"
+    },
+    {
+        "id": 3,
+        "title": "Play Store blocks AuroraStore, hurting GrapheneOS users",
+        "url": "https://gitlab.com/AuroraOSS/AuroraStore/-/work_items/1566"
+    },
+    {
+        "id": 4,
+        "title": "Ambient CSS v3 \u2013 Blender meets CSS",
+        "url": "https://ambientcss.vercel.app/"
+    },
+    {
+        "id": 5,
+        "title": "Io_uring Without Readahead",
+        "url": "https://frn.sh/io-uring/"
+    },
+    {
+        "id": 6,
         "title": "44% on ARC-AGI-1 in 67 cents",
         "url": "https://mvakde.github.io/blog/44-on-arc-1/"
     },
     {
-        "id": 3,
-        "title": "Fastpotify",
-        "url": "https://fastpotify.rocks/"
-    },
-    {
-        "id": 4,
-        "title": "GPU World",
-        "url": "https://www.gpuworld.org/"
-    },
-    {
-        "id": 5,
+        "id": 7,
         "title": "American Airlines' Legendary Mechanic Passes Away at 100 After 80-Year Career",
         "url": "https://simpleflying.com/american-airlines-mechanic-passes-away-100-record-80-years/"
     },
     {
-        "id": 6,
-        "title": "Tmp.0ut Volume 5",
-        "url": "https://tmpout.sh/5/"
-    },
-    {
-        "id": 7,
-        "title": "Restroom Archive",
-        "url": "https://restroomarchive.com"
-    },
-    {
         "id": 8,
-        "title": "Polishing Cloth Updated",
-        "url": "https://512pixels.net/2026/08/polishing-cloth-updated/"
+        "title": "Fastpotify",
+        "url": "https://fastpotify.rocks/"
     },
     {
         "id": 9,
-        "title": "Playa Phone",
-        "url": "https://playaphone.com/"
+        "title": "We Are Rebuilding Monica",
+        "url": "https://www.monicahq.com/en/blog/we-are-rebuilding-monica/"
     },
     {
         "id": 10,
-        "title": "I turned my security cameras into an automatic bird identification system",
-        "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/"
+        "title": "Introducing Ad Blocker for Firefox on iOS",
+        "url": "https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/"
     }
 ]
