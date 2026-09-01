@@ -1,48 +1,48 @@
 [
     {
         "id": 1,
-        "title": "Google Has Removed MV2 Extensions from the Chrome Web Store, Including UBO",
-        "url": "https://webiterate.dev/google-removed-extensions-ublock-origin-108/"
+        "title": "Fastpotify",
+        "url": "https://fastpotify.rocks/"
     },
     {
         "id": 2,
+        "title": "Google Antigravity introduces Boost deep reasoning (/boost)",
+        "url": "https://antigravity.google/docs/boost/"
+    },
+    {
+        "id": 3,
+        "title": "Tailcat: Tailscale Without Tailscale, by Tailscale",
+        "url": "https://tailscale.com/blog/tailcat"
+    },
+    {
+        "id": 4,
         "title": "I turned my security cameras into an automatic bird identification system",
         "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/"
     },
     {
-        "id": 3,
+        "id": 5,
         "title": "Playa Phone",
         "url": "https://playaphone.com/"
     },
     {
-        "id": 4,
+        "id": 6,
         "title": "A walkable ASCII cyberpunk city in one HTML file [video]",
         "url": "https://www.youtube.com/watch?v=3YtygAx_C6A"
     },
     {
-        "id": 5,
-        "title": "'Mad honey' that can stop your heart is being sold online",
-        "url": "https://phys.org/news/2026-08-mad-honey-heart-sold-online.html"
-    },
-    {
-        "id": 6,
-        "title": "Show HN: Laser Graffiti",
-        "url": "https://laser.consti.de"
-    },
-    {
         "id": 7,
-        "title": "Smartphone LED detects hidden cameras with AI",
-        "url": "https://www.chosun.com/english/industry-en/2026/08/30/SBFXUIJQYZEARKP5T4FBAY25HQ/"
-    },
-    {
-        "id": 8,
         "title": "Terence Tao explains 6 essential mathematical concepts [video]",
         "url": "https://www.youtube.com/watch?v=OOMx2BHHWtE"
     },
     {
+        "id": 8,
+        "title": "Restroom Archive",
+        "url": "https://restroomarchive.com"
+    },
+    {
         "id": 9,
-        "title": "Autonomous (YC F25) Is Hiring Engineers",
-        "url": "item?id=49514781"
+        "title": "Evidence of Fraud in an Influential Study About Procrastination",
+        "url": "https://datacolada.org/138"
     },
     {
         "id": 10,
