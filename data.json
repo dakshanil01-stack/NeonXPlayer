@@ -1,52 +1,52 @@
 [
     {
         "id": 1,
+        "title": "AnkiDroid: Google Play no longer allowing Open Collective donation link",
+        "url": "https://github.com/ankidroid/Anki-Android/issues/21656"
+    },
+    {
+        "id": 2,
+        "title": "44% on ARC-AGI-1 in 67 cents",
+        "url": "https://mvakde.github.io/blog/44-on-arc-1/"
+    },
+    {
+        "id": 3,
         "title": "Fastpotify",
         "url": "https://fastpotify.rocks/"
     },
     {
-        "id": 2,
-        "title": "Google Antigravity introduces Boost deep reasoning (/boost)",
-        "url": "https://antigravity.google/docs/boost/"
-    },
-    {
-        "id": 3,
-        "title": "Tailcat: Tailscale Without Tailscale, by Tailscale",
-        "url": "https://tailscale.com/blog/tailcat"
-    },
-    {
         "id": 4,
-        "title": "I turned my security cameras into an automatic bird identification system",
-        "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/"
+        "title": "GPU World",
+        "url": "https://www.gpuworld.org/"
     },
     {
         "id": 5,
-        "title": "Playa Phone",
-        "url": "https://playaphone.com/"
+        "title": "American Airlines' Legendary Mechanic Passes Away at 100 After 80-Year Career",
+        "url": "https://simpleflying.com/american-airlines-mechanic-passes-away-100-record-80-years/"
     },
     {
         "id": 6,
-        "title": "A walkable ASCII cyberpunk city in one HTML file [video]",
-        "url": "https://www.youtube.com/watch?v=3YtygAx_C6A"
+        "title": "Tmp.0ut Volume 5",
+        "url": "https://tmpout.sh/5/"
     },
     {
         "id": 7,
-        "title": "Terence Tao explains 6 essential mathematical concepts [video]",
-        "url": "https://www.youtube.com/watch?v=OOMx2BHHWtE"
-    },
-    {
-        "id": 8,
         "title": "Restroom Archive",
         "url": "https://restroomarchive.com"
     },
     {
+        "id": 8,
+        "title": "Polishing Cloth Updated",
+        "url": "https://512pixels.net/2026/08/polishing-cloth-updated/"
+    },
+    {
         "id": 9,
-        "title": "Evidence of Fraud in an Influential Study About Procrastination",
-        "url": "https://datacolada.org/138"
+        "title": "Playa Phone",
+        "url": "https://playaphone.com/"
     },
     {
         "id": 10,
-        "title": "Dwarf Fortress is getting the mother of all magic updates",
-        "url": "https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe"
+        "title": "I turned my security cameras into an automatic bird identification system",
+        "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/"
     }
 ]
