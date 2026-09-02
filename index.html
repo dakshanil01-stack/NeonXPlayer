@@ -1,209 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- Google Search Console Verification Tag (UNTOUCHED & SAFE) -->
-    <meta name="google-site-verification" content="h-cMZdDV4jUlnwWcpUtezKzhc_cB-mBcjEewGIswJmY" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Essential SEO Meta Tags -->
-    <title>NeonX Engine - Live Web Scraper & Unlimited Search Hub</title>
-    <meta name="description" content="Discover live trending topics, technology updates, news, and custom search results instantly using NeonX Engine - Free Unlimited Web Scraper Hub.">
-    <meta name="keywords" content="web scraper, live search engine, trending topics, technology news, neonx engine">
-    <meta name="robots" content="index, follow">
 
-    <!-- CSS Frameworks & Icons -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StitchStream Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#6e208c",
+                      "surface-container": "#201f1f",
+                      "primary-fixed-dim": "#ffb4aa",
+                      "surface-container-highest": "#353534",
+                      "on-surface": "#e5e2e1",
+                      "on-secondary": "#520070",
+                      "surface-tint": "#ffb4aa",
+                      "primary": "#ffb4aa",
+                      "background": "#131313",
+                      "primary-container": "#e50914",
+                      "outline": "#af8782",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#737272",
+                      "on-secondary-fixed-variant": "#6e208c",
+                      "surface-variant": "#353534",
+                      "surface-bright": "#3a3939",
+                      "on-primary-container": "#fff7f6",
+                      "tertiary-fixed": "#e5e2e1",
+                      "on-secondary-fixed": "#320046",
+                      "on-primary-fixed-variant": "#930007",
+                      "on-primary-fixed": "#410001",
+                      "inverse-on-surface": "#313030",
+                      "secondary-fixed-dim": "#edb1ff",
+                      "on-tertiary-container": "#fbf8f8",
+                      "surface-dim": "#131313",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "on-tertiary": "#303030",
+                      "on-background": "#e5e2e1",
+                      "outline-variant": "#5e3f3b",
+                      "on-surface-variant": "#e9bcb6",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#1b1b1c",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-primary": "#690003",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-container": "#e498ff",
+                      "on-error": "#690005",
+                      "secondary": "#edb1ff",
+                      "surface-container-high": "#2a2a2a",
+                      "inverse-primary": "#c0000c",
+                      "surface-container-low": "#1c1b1b",
+                      "inverse-surface": "#e5e2e1",
+                      "primary-fixed": "#ffdad5",
+                      "tertiary": "#c8c6c5",
+                      "surface": "#131313",
+                      "secondary-fixed": "#f9d8ff",
+                      "on-tertiary-fixed-variant": "#474746"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin-desktop": "64px",
+                      "container-margin-mobile": "20px",
+                      "base": "8px",
+                      "section-gap": "48px",
+                      "gutter-desktop": "24px"
+              },
+              "fontFamily": {
+                      "headline-md-mobile": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "title-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Be Vietnam Pro"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .poster-hover:hover .poster-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
-
-    <!-- Header Section -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-cyan-500 to-blue-600 p-2.5 rounded-xl shadow-lg shadow-cyan-500/20">
-                    <i class="fa-solid fa-bolt text-xl text-white"></i>
-                </div>
-                <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    NeonX Engine
-                </h1>
-            </div>
-            <div id="liveStatus" class="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Engine Ready
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        
-        <!-- Search & Control Panel -->
-        <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl mb-8">
-            <h2 class="text-2xl font-bold text-center mb-2">Unlimited Topic Search & Scraper</h2>
-            <p class="text-slate-400 text-center text-sm mb-6">Type any topic or category to fetch live aggregated web data instantly.</p>
-            
-            <form id="searchForm" class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
-                <div class="relative flex-1">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                    <input type="text" id="searchInput" placeholder="Search topic (e.g. AI, Crypto, Web Dev, Cricket)..." required
-                        class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-cyan-500 transition text-white">
-                </div>
-                <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-sm">
-                    <i class="fa-solid fa-filter"></i> Fetch Data
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-surface-variant/10 flat no shadows">
+<div class="flex justify-between items-center px-container-margin-desktop h-20 w-full">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-primary text-2xl tracking-tighter">StitchStream</span>
+<ul class="hidden md:flex gap-6">
+<li class="cursor-pointer text-primary font-bold border-b-2 border-primary pb-1 font-title-lg text-title-lg hover:scale-105 transition-transform duration-200">Home</li>
+<li class="cursor-pointer text-on-surface-variant hover:text-on-surface transition-colors font-title-lg text-title-lg hover:scale-105 transition-transform duration-200">TV Shows</li>
+<li class="cursor-pointer text-on-surface-variant hover:text-on-surface transition-colors font-title-lg text-title-lg hover:scale-105 transition-transform duration-200">Movies</li>
+<li class="cursor-pointer text-on-surface-variant hover:text-on-surface transition-colors font-title-lg text-title-lg hover:scale-105 transition-transform duration-200">New &amp; Popular</li>
+<li class="cursor-pointer text-on-surface-variant hover:text-on-surface transition-colors font-title-lg text-title-lg hover:scale-105 transition-transform duration-200">My List</li>
+</ul>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer hover:text-primary transition-colors">search</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:scale-105 transition-transform duration-200 hover:text-primary">notifications</span>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full cursor-pointer hover:scale-105 transition-transform duration-200" data-alt="A stylized, high-contrast avatar image of a user profile with neon purple and deep red lighting accents reflecting the dark theatrical streaming UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsp9IOU6zedJTqfzdz1fL36vE310V5L9s7D2fhleHd4hxsYJm-sQt9EZaNZQrPJGoZZzYctXny-m7FvPYHU0oXJjaUi1TIztAL5ZPXSQ1jimj12TFxyhMLQCPoDKhcqbxRWO5Qz_x2b8dneM0o9qlJf15ml68TKCDvgmhQ_QMzq3MGsXFkTvp1j9Ai2FeaTUS8-FHPE4lOk4WMseHV_CKP_ZP-62lmlQZnstRpwj6b1BSHNSAU2RUrEg"/>
+</div>
+</div>
+</nav>
+<!-- Hero / Featured Trailer -->
+<header class="relative w-full h-[819px] min-h-[600px]">
+<div class="absolute inset-0 w-full h-full" data-alt="A cinematic, ultra-wide landscape shot from a moody sci-fi thriller movie. Deep shadows, electric blue and neon red lighting cutting through fog. The composition leaves the left side relatively empty for dark UI text overlays. High-end theatrical quality." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjcPD-ISbDDBB3Uxp5Y863aKRRWjquNF13qn-gXiFGHz7vG3zShwL8gN5eR49RryB0-RxJIRuAmLMX-0ysVBL-ePaTrcusSrHZPlaLBSOLo-Je_SEz1icjjGHE8swdVENB34aI0BV-kmV3VH8y0MfBIEThJzQvm0b-BqH3ISUEckgtxmKakzp_yo9_cnUfKvFTixeXkrlHJqT37krrxHyEC5HxwasyVRzer2gel_5CIxn0qp8necioyg')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-1/4 left-container-margin-desktop md:w-1/2 flex flex-col gap-4 z-10">
+<h1 class="font-display-lg text-display-lg text-white">Cybernetic Dawn</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">In a dystopian metropolis, a rogue AI begins to exhibit human emotions, triggering a city-wide manhunt. The line between man and machine blurs in this high-octane thriller.</p>
+<div class="flex gap-4 mt-4">
+<button class="bg-primary-container text-white px-8 py-3 rounded-lg font-title-lg text-title-lg flex items-center gap-2 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span> Play
                 </button>
-            </form>
-
-            <!-- Quick Categories -->
-            <div class="flex flex-wrap justify-center gap-2 mt-6">
-                <button onclick="quickSearch('Technology')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># Technology</button>
-                <button onclick="quickSearch('Programming')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># Programming</button>
-                <button onclick="quickSearch('Artificial Intelligence')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># AI Trends</button>
-                <button onclick="quickSearch('World News')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium text-slate-300 transition"># World News</button>
-            </div>
-        </section>
-
-        <!-- Results Grid -->
-        <section>
-            <div class="flex items-center justify-between mb-4">
-                <h3 id="resultTitle" class="text-lg font-semibold text-slate-200">Featured Web Scrapes</h3>
-                <span id="itemCount" class="text-xs font-medium bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md">Live Engine</span>
-            </div>
-
-            <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Static Fallback Cards to prevent Soft 404 in Google Search Console -->
-                <article class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-                    <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">System Info</span>
-                    <h4 class="font-bold text-white mt-2 mb-1">Live Web Scraper & Crawler</h4>
-                    <p class="text-xs text-slate-400">Search any category like AI, Tech, Programming, or News to fetch real-time indexed data instantly.</p>
-                </article>
-                <article class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-                    <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">Features</span>
-                    <h4 class="font-bold text-white mt-2 mb-1">Unlimited Free Searches</h4>
-                    <p class="text-xs text-slate-400">Fast client-side fetching with zero rate limits for multi-user real-time query results.</p>
-                </article>
-            </div>
-
-            <!-- Loader -->
-            <div id="loader" class="hidden text-center py-12">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-cyan-500 border-t-transparent"></div>
-                <p class="text-sm text-slate-400 mt-3">Scraping live web sources...</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Logic Script -->
-    <script>
-        const searchForm = document.getElementById('searchForm');
-        const searchInput = document.getElementById('searchInput');
-        const resultsGrid = document.getElementById('resultsGrid');
-        const loader = document.getElementById('loader');
-        const resultTitle = document.getElementById('resultTitle');
-        const itemCount = document.getElementById('itemCount');
-
-        // Initial Load (Default Trending Data)
-        window.onload = () => {
-            fetchTopicData('Trending Technology');
-        };
-
-        searchForm.onsubmit = (e) => {
-            e.preventDefault();
-            const query = searchInput.value.trim();
-            if (query) fetchTopicData(query);
-        };
-
-        function quickSearch(topic) {
-            searchInput.value = topic;
-            fetchTopicData(topic);
-        }
-
-        async function fetchTopicData(query) {
-            resultsGrid.innerHTML = '';
-            loader.classList.remove('hidden');
-            resultTitle.innerText = `Results for "${query}"`;
-
-            let results = [];
-
-            try {
-                // Primary Source: Wikipedia REST API (CORS friendly and handles proper names & terms)
-                const wikiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=&format=json&origin=*`;
-                const res = await fetch(wikiUrl);
-                const data = await res.json();
-
-                if (data.query && data.query.search && data.query.search.length > 0) {
-                    data.query.search.forEach(item => {
-                        const cleanSnippet = item.snippet.replace(/<\/?[^>]+(>|$)/g, "");
-                        results.push({
-                            title: item.title,
-                            snippet: cleanSnippet + '...',
-                            url: `https://en.wikipedia.org/?curid=${item.pageid}`,
-                            category: query
-                        });
-                    });
-                }
-            } catch (err) {
-                console.log("Primary fetch failed, checking proxy fallback...", err);
-            }
-
-            // Fallback Source: AllOrigins CORS Proxy wrapper for DuckDuckGo
-            if (results.length === 0) {
-                try {
-                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`)}`;
-                    const res = await fetch(proxyUrl);
-                    const proxyData = await res.json();
-                    const data = JSON.parse(proxyData.contents);
-
-                    if (data.RelatedTopics) {
-                        data.RelatedTopics.forEach(item => {
-                            if (item.Text && item.FirstURL) {
-                                results.push({
-                                    title: item.Text.split(' - ')[0] || item.Text,
-                                    snippet: item.Text,
-                                    url: item.FirstURL,
-                                    category: query
-                                });
-                            }
-                        });
-                    }
-                } catch (e) {
-                    console.log("Fallback search error:", e);
-                }
-            }
-
-            loader.classList.add('hidden');
-
-            if (results.length === 0) {
-                resultsGrid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">No live data found for this topic. Try another search!</div>`;
-                itemCount.innerText = `0 results`;
-                return;
-            }
-
-            itemCount.innerText = `${results.length} results`;
-
-            results.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/5 transition flex flex-col justify-between group';
-                card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20">
-                                ${item.category}
-                            </span>
-                            <span class="text-xs text-slate-500">#${index + 1}</span>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 group-hover:text-cyan-400 transition">${item.title}</h4>
-                        <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
-                            ${item.snippet || item.title}
-                        </p>
-                    </div>
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" 
-                       class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition">
-                       Read Full Article <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                    </a>
-                `;
-                resultsGrid.appendChild(card);
-            });
-        }
-    </script>
-</body>
-</html>
+<button class="bg-surface-variant/40 backdrop-blur-md border border-white/20 text-white px-8 py-3 rounded-lg font-title-lg text-title-lg flex items-center gap-2 hover:bg-surface-variant/60 transition-colors">
+<span class="material-symbols-outlined">info</span> More Info
+                </button>
+</div>
+</div>
+</header>
+<!-- Content Sections -->
+<main class="relative z-20 pb-24 -mt-24">
+<!-- Continue Watching Row -->
+<section class="mb-section-gap pl-container-margin-desktop">
+<h2 class="font-headline-md text-headline-md text-white mb-4">Continue Watching</h2>
+<div class="flex overflow-x-auto gap-4 no-scrollbar pr-container-margin-desktop pb-4">
+<!-- Card 1 -->
+<div class="relative min-w-[240px] md:min-w-[300px] h-[160px] md:h-[200px] rounded-xl overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A gritty, dramatic scene from a crime drama series, focusing on a detective's intense expression illuminated by a streetlamp at night. Deep charcoal tones and stark contrasts." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTS1ByZhIEFO8y-kSzQk6bKx94nO3yW1TKRN-p9g6JZGYRgjfkmiR-pUn8ISRknICpkQo7u1d2tVWCnlIMCRgHDMh1UECzVMAgYTbmcIEfbAa_7ZaojSeQNQU0x94Z356Z3CmjCQ2OXUu--ZpNvJpJ33CHHPkJoLYEk4HjGkV8v2kkrapGdSL0NaMUrbccvGu10tXWi3n7EMX0IrdEDibOHMZaj3grHkQ0AuJ755RxgFyPrrn7v2ka5w')"></div>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-variant">
+<div class="h-full bg-gradient-to-r from-primary-container to-secondary-container w-2/3"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative min-w-[240px] md:min-w-[300px] h-[160px] md:h-[200px] rounded-xl overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A vibrant, stylized still from an animated fantasy epic. A glowing mystical forest with deep purples and luminescent greens. Rich textures and immersive lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOlSYzVhB_JnrdnSzObxKipVQzvjVl5u7UgT11--V4uMj_IDFuo41w5cOAIQWekuUrwRh-lfC9GDNUgfs2WPT1BU-Bad2j2ueQPpSLoBsd05TyyutnuLg4Ex-zkl57ZQKz972xqldWm0KrzXUgCvr1cASCSiju9LsdeAWxdfl6ZHSolv8wrD6mLFZlyB1xMXIX4-VTCpwEZLWaJEoakI8SJwXyJDt6nfwznJLCtSLqRFxwjIKVIDwt8g')"></div>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-variant">
+<div class="h-full bg-gradient-to-r from-primary-container to-secondary-container w-1/4"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending Now Row -->
+<section class="mb-section-gap pl-container-margin-desktop">
+<h2 class="font-headline-md text-headline-md text-white mb-4">Trending Now</h2>
+<div class="flex overflow-x-auto gap-4 no-scrollbar pr-container-margin-desktop py-4">
+<!-- Poster 1 -->
+<div class="poster-hover relative min-w-[160px] md:min-w-[200px] aspect-[2/3] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 shadow-lg shadow-black/50 ring-1 ring-white/10 hover:ring-primary/50">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A dramatic movie poster featuring a solitary figure walking away from an explosion. High contrast, cinematic lighting with strong oranges and deep blacks. Action-packed aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAR0jS_50Q7NroX8OJod6vSfAr3nyLfGB28RUJzzt4lPp9yBHc2ztrcqwmpcQ3v_ThxhKux1VKRymfBENAXpAYSsIKaUGfCt6NRr0aFu9_3nT7y-xjH6fRxMSzOSy7AxnBFWyXBvi4rpiLJX1aSbxn_Rr0dUmwwqrm116nVvUR63CuSDaCRC0eHCWqDLuRSofczNECZ4YbwilR64rh9zckpZYrgZBu1qKXJNFcJVvMw_tu9Zaj_tjJeGw')"></div>
+<!-- Hover Detail Overlay -->
+<div class="poster-overlay absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 translate-y-4 transition-all duration-300 flex flex-col justify-end p-4">
+<h3 class="font-title-lg text-title-lg text-white mb-1">Inferno Protocol</h3>
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant mb-2">
+<span class="text-secondary-fixed">98% Match</span>
+<span>2024</span>
+<span class="px-1 border border-surface-variant rounded text-xs">R</span>
+</div>
+</div>
+</div>
+<!-- Poster 2 -->
+<div class="poster-hover relative min-w-[160px] md:min-w-[200px] aspect-[2/3] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 shadow-lg shadow-black/50 ring-1 ring-white/10 hover:ring-primary/50">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="An atmospheric horror movie poster. A silhouette standing in a foggy, dimly lit corridor. Cool blue tones and stark shadows creating a sense of dread and suspense." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuWJ3MZ3O9Bsn88lMTTKuZ_4KJTafVQkU2pjws2RSyIQuf7MQot9HIvSE5sxWqWxsEjVbSHER_csrdnYYP9syznNUaq6zwMGH_B9qyY6AqT1OSUQpuHz_Fp0ioLxZZTE7tVjVYJv7vUGWhHBcz_AzmPNrhSsgiJzfSx3uz4A1bE1MdPC8nUdMLuOTbEwKfvvtX5UUO-N1_HgCzU_9utkI6fcIh74808WJL_PEu40g3pCMur-nxi6wVdw')"></div>
+<!-- Hover Detail Overlay -->
+<div class="poster-overlay absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 translate-y-4 transition-all duration-300 flex flex-col justify-end p-4">
+<h3 class="font-title-lg text-title-lg text-white mb-1">The Whispering Halls</h3>
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant mb-2">
+<span class="text-secondary-fixed">92% Match</span>
+<span>2023</span>
+<span class="px-1 border border-surface-variant rounded text-xs">TV-MA</span>
+</div>
+</div>
+</div>
+<!-- Poster 3 -->
+<div class="poster-hover relative min-w-[160px] md:min-w-[200px] aspect-[2/3] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 shadow-lg shadow-black/50 ring-1 ring-white/10 hover:ring-primary/50">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A sleek sci-fi poster featuring a spaceship orbiting a neon-lit planet. Vibrant purples, deep space blacks, and glowing technological details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_YfnrSqGPLJ_9M9NIODFsIAU5OHgUyjf02Ra7PaMU57lp5WbCBxvQ2HdiA4RhEsLpEoF5NxRyArFaGR0BXM33RcFvN6bvryfYjb2q_hcqWbFXFZY0_w9mYQIMdc5CrMW9U36rkxhc4oJHy9UgMUi4lJcG-tXHY3hTLTS-cbBpWo6hg13qnlNEQ6jjXFguulNmIPWM0Oow4Tpt-59oqu5-U1UGzvYmugHkJ0Wdvgkn8Xhj-xEREPapAA')"></div>
+<div class="absolute top-2 left-2 bg-primary-container/80 backdrop-blur text-white text-xs px-2 py-1 rounded-full font-bold">New Episode</div>
+<!-- Hover Detail Overlay -->
+<div class="poster-overlay absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 translate-y-4 transition-all duration-300 flex flex-col justify-end p-4">
+<h3 class="font-title-lg text-title-lg text-white mb-1">Orbit</h3>
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant mb-2">
+<span class="text-secondary-fixed">99% Match</span>
+<span>2024</span>
+<span class="px-1 border border-surface-variant rounded text-xs">TV-14</span>
+</div>
+</div>
+</div>
+<!-- Poster 4 -->
+<div class="poster-hover relative min-w-[160px] md:min-w-[200px] aspect-[2/3] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 shadow-lg shadow-black/50 ring-1 ring-white/10 hover:ring-primary/50">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A romantic comedy poster showing two people laughing under a stylized umbrella in the rain. Warm streetlamp lighting contrasting with moody rainy blues." style="background-image: url('https://lh3.googleuser
