@@ -1,52 +1,52 @@
 [
     {
         "id": 1,
+        "title": "Commodore 64 released September 1, 1982",
+        "url": "https://dfarq.homeip.net/commodore-64-released-september-1-1982/"
+    },
+    {
+        "id": 2,
         "title": "Claude Fable 5.1 and Claude Mythos 5.1",
         "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
     },
     {
-        "id": 2,
+        "id": 3,
+        "title": "The Emergent Symbolic Structure of Artificial Neural Networks",
+        "url": "https://arxiv.org/abs/2608.29530"
+    },
+    {
+        "id": 4,
         "title": "How accurate have Ed Zitron's AI skeptic predictions been?",
         "url": "https://danluu.com/zitron/"
     },
     {
-        "id": 3,
-        "title": "True Rate of Unemployment",
-        "url": "https://www.lisep.org/tru"
-    },
-    {
-        "id": 4,
-        "title": "The efficient frontier of LLM inference",
-        "url": "https://www.baseten.co/blog/the-efficient-frontier-of-llm-inference/"
-    },
-    {
         "id": 5,
-        "title": "Show HN: Weedout \u2013 Safari extension that hides YouTube AI-labeled videos",
-        "url": "https://masteranza.github.io/weedout/"
-    },
-    {
-        "id": 6,
-        "title": "My local model setup on an M4 Pro Mac Mini",
-        "url": "https://lws.io/blog/my-local-model-setup/"
-    },
-    {
-        "id": 7,
-        "title": "FBI Probes Service Selling 153M+ Drivers Licenses",
-        "url": "https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/"
-    },
-    {
-        "id": 8,
         "title": "Fine, I'll build my own text editor",
         "url": "https://dbushell.com/2026/09/01/text-editor/"
     },
     {
-        "id": 9,
+        "id": 6,
+        "title": "FBI Probes Service Selling 153M+ Drivers Licenses",
+        "url": "https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/"
+    },
+    {
+        "id": 7,
         "title": "Introducing Ad Blocker for Firefox on iOS",
         "url": "https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/"
     },
     {
+        "id": 8,
+        "title": "WebFPGA (2019)",
+        "url": "https://webfpga.io/"
+    },
+    {
+        "id": 9,
+        "title": "Open Battery Information",
+        "url": "https://github.com/mnh-jansson/open-battery-information"
+    },
+    {
         "id": 10,
-        "title": "Sonic Pi",
-        "url": "https://sonic-pi.net/"
+        "title": "Show HN: Weedout \u2013 Safari extension that hides YouTube AI-labeled videos",
+        "url": "https://masteranza.github.io/weedout/"
     }
 ]
